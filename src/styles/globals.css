@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: "Charles Wright";
+	src: url("/fonts/CHARWRG_.TTF");
+}
+
+@layer base {
+	:root {
+		--background: #f1f1f2;
+		--foreground: #1a535c;
+
+		--card: #ffffff;
+		--card-foreground: #070707;
+
+		--popover: #ffffff;
+		--popover-foreground: #070707;
+
+		--primary: #1c1c1c;
+		--primary-foreground: #f5f0f0;
+
+		--secondary: #f5f0f0;
+		--secondary-foreground: #1c1c1c;
+
+		--muted: #f5f0f0;
+		--muted-foreground: #787878;
+
+		--accent: #f5f0f0;
+		--accent-foreground: #1c1c1c;
+
+		--destructive: #ff6b6b;
+		--destructive-foreground: #f5f0f0;
+
+		--border: #ededed;
+		--input: #ededed;
+		--ring: #070707;
+
+		--major: #ff6b6b;
+		--warning: #ffe66d;
+
+		--plate: #ffd700;
+		--plate-text: #000;
+		--plate-font: "Charles Wright", sans-serif;
+
+		--search: #003366;
+
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: #070707;
+		--foreground: #f1f1f2;
+
+		--card: #070707;
+		--card-foreground: #f5f0f0;
+
+		--popover: #070707;
+		--popover-foreground: #f5f0f0;
+
+		--primary: #f5f0f0;
+		--primary-foreground: #1c1c1c;
+
+		--secondary: #2b2b2b;
+		--secondary-foreground: #f5f0f0;
+
+		--muted: #2b2b2b;
+		--muted-foreground: #343434;
+
+		--accent: #2b2b2b;
+		--accent-foreground: #f5f0f0;
+
+		/* --destructive: #4ecdc4;
+		--destructive-foreground: #f5f0f0; */
+
+		--border: #2b2b2b;
+		--input: #2b2b2b;
+		--ring: #d6d6d6;
+
+		--search: #66b3ff;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+}
