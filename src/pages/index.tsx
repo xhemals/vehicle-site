@@ -4,7 +4,6 @@ import NumberPlateSearch from "@/components/number-plate/numer-plate-search";
 export default function Home() {
 	return (
 		<>
-			{/* <NumberPlate reg="ds59cso" /> */}
 			<NumberPlateSearch />
 			<ModeToggle />
 		</>
