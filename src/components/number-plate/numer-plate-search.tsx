@@ -39,17 +39,16 @@ export default function NumberPlateSearch() {
 					}}
 					required
 				/>
-				<div
-					className={`rounded-lg bg-destructive p-2 text-center text-black shadow-lg ${validReg ? "hidden" : ""}`}
-				>
-					<p>Enter a valid UK reg</p>
-				</div>
 				<Button
-					className="w-3/6 bg-search hover:brightness-75"
+					className={`w-3/6 ${
+						validReg
+							? "bg-search hover:brightness-75"
+							: "bg-destructive text-center text-black"
+					}`}
 					type="submit"
-					disabled={!reg}
+					disabled={!reg || !validReg}
 				>
-					Search
+					{validReg ? "Search" : "Enter a valid UK reg"}
 				</Button>
 			</div>
 		</form>
