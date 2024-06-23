@@ -35,6 +35,7 @@ const config = {
 				foreground: "var(--foreground)",
 				major: "var(--major)",
 				warning: "var(--warning)",
+				success: "var(--success)",
 				plate: "var(--plate)",
 				"plate-text": "var(--plate-text)",
 				primary: {
