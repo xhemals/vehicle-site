@@ -10,28 +10,34 @@ export default async function DbCarInfo(reg: string) {
 		await client.connect();
 		const document = await collection.findOne({ vrm: reg });
 
-		// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-		return { motData: document.motData, dvlaData: document.dvlaData };
-	} catch (error) {
-		// If car not in database, get data and insert it
-		const dvlaData = (await GetDvlaInfo(reg)) as object;
-		const motData = (await GetMotData(reg)) as object;
+		if (document) {
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+			return { motData: document.motData, dvlaData: document.dvlaData };
+		} else {
+			// If car not in database, get data and insert it
+			const dvlaData = (await GetDvlaInfo(reg)) as object;
+			const motData = (await GetMotData(reg)) as object;
 
-		await collection.insertOne({
-			vrm: reg,
-			motData: motData,
-			dvlaData: dvlaData,
-			createdAt: new Date(),
-		});
-		await collection.dropIndex("createdAt_1");
-		await collection.createIndex(
-			{ createdAt: 1 },
-			{ expireAfterSeconds: 3600 }, // "cache" the data for 1 hour
-		);
-		return {
-			motData: motData,
-			dvlaData: dvlaData,
-		};
+			await collection.insertOne({
+				vrm: reg,
+				motData: motData,
+				dvlaData: dvlaData,
+				createdAt: new Date(),
+			});
+
+			// Ensure the index is created with a TTL of 1 hour
+			await collection.createIndex(
+				{ createdAt: 1 },
+				{ expireAfterSeconds: 3600 },
+			);
+
+			return {
+				motData: motData,
+				dvlaData: dvlaData,
+			};
+		}
+	} catch (error) {
+		throw error;
 	} finally {
 		await client.close();
 	}
