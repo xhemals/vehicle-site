@@ -81,10 +81,23 @@ const config = {
 					from: { height: "var(--radix-accordion-content-height)" },
 					to: { height: "0" },
 				},
+				rumbleAnimation: {
+					"0%, 100%": { transform: "translateX(-50%) rotate(0)" },
+					"25%": {
+						transform: "translateX(-50%) translateY(-0.5px) rotate(-0.5deg)",
+					},
+					"50%": {
+						transform: "translateX(-50%) translateY(0.5px) rotate(0.5deg)",
+					},
+					"75%": {
+						transform: "translateX(-50%) translateY(-0.5px) rotate(-0.5deg)",
+					},
+				},
 			},
 			animation: {
 				"accordion-down": "accordion-down 0.2s ease-out",
 				"accordion-up": "accordion-up 0.2s ease-out",
+				rumble: "rumbleAnimation 0.7s ease-in-out infinite",
 			},
 		},
 	},

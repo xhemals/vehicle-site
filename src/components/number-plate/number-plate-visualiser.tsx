@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import ValidateNumberPlate from "@/components/number-plate/number-plate-validate";
 
-export default function NumberPlate({ reg }: { reg: string }) {
+export default function NumberPlate({
+	reg,
+	className = "",
+}: {
+	reg: string;
+	className?: string;
+}) {
 	const [formattedReg, setFormattedReg] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -20,7 +26,9 @@ export default function NumberPlate({ reg }: { reg: string }) {
 	}, [reg]);
 
 	return (
-		<div className="flex h-[55.5px] w-[260px] flex-col items-center justify-center rounded-lg bg-plate md:h-[111px] md:w-[520px] select-none">
+		<div
+			className={`flex h-[55.5px] w-[260px] flex-col items-center justify-center rounded-lg bg-plate md:h-[111px] md:w-[520px] select-none ${className}`}
+		>
 			<div className="flex gap-[16.5px] md:gap-[33px] font-plate text-[39.5px] text-plate-text md:text-[79px]">
 				<span>{formattedReg[0]}</span>
 				<span>{formattedReg[1]}</span>

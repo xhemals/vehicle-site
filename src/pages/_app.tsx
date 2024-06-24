@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import { type AppType } from "next/app";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import "@/styles/globals.css";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";

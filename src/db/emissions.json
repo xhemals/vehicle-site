@@ -1,0 +1,15 @@
+[
+	{ "band": "A", "emissions": { "lower": 0, "upper": 100 }, "rate": 0 },
+	{ "band": "B", "emissions": { "lower": 101, "upper": 110 }, "rate": 20 },
+	{ "band": "C", "emissions": { "lower": 111, "upper": 120 }, "rate": 35 },
+	{ "band": "D", "emissions": { "lower": 121, "upper": 130 }, "rate": 160 },
+	{ "band": "E", "emissions": { "lower": 131, "upper": 140 }, "rate": 190 },
+	{ "band": "F", "emissions": { "lower": 141, "upper": 150 }, "rate": 210 },
+	{ "band": "G", "emissions": { "lower": 151, "upper": 165 }, "rate": 255 },
+	{ "band": "H", "emissions": { "lower": 166, "upper": 175 }, "rate": 305 },
+	{ "band": "I", "emissions": { "lower": 176, "upper": 185 }, "rate": 335 },
+	{ "band": "J", "emissions": { "lower": 186, "upper": 200 }, "rate": 385 },
+	{ "band": "K", "emissions": { "lower": 201, "upper": 225 }, "rate": 415 },
+	{ "band": "L", "emissions": { "lower": 226, "upper": 255 }, "rate": 710 },
+	{ "band": "M", "emissions": { "lower": 256, "upper": 9999 }, "rate": 735 }
+]
