@@ -5,7 +5,7 @@ export default function UITaxMot({
 }: {
 	vehicleData: {
 		taxStatus: { taxed: string; due: string };
-		motStatus: { mot: string; expiryDate: string };
+		motStatus: { mot: string; expiryDateShort: string; expiryDateLong: string };
 	};
 }) {
 	return (
@@ -40,8 +40,10 @@ export default function UITaxMot({
 						<div className="flex flex-col items-center w-fit">
 							<span className="font-bold">{vehicleData.motStatus.mot}</span>
 							<span className="text-xs md:pt-1">
-								{checkIfExpired(vehicleData.motStatus.expiryDate) ? "Expired" : "Due"}:{" "}
-								{vehicleData.motStatus.expiryDate}
+								{checkIfExpired(vehicleData.motStatus.expiryDateShort)
+									? "Expired"
+									: "Due"}
+								: {vehicleData.motStatus.expiryDateLong}
 							</span>
 						</div>
 					</CardContent>

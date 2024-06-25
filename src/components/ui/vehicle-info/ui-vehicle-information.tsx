@@ -10,13 +10,13 @@ export default function UIVehicleInformation({
 			model: string;
 			year: number | string;
 			colour: string;
-			v5cIssued: string;
+			v5cIssuedLong: string;
 			firstRegistered: string;
 		};
 	};
 }) {
 	return (
-		<Card className="md:w-[450px] w-full">
+		<Card className="md:min-w-[450px] md:max-w-[450px] w-full h-fit">
 			<CardHeader className="pb-3 pt-4">
 				<CardTitle className="md:text-xl text-base">Vehicle Information</CardTitle>
 			</CardHeader>
@@ -76,7 +76,7 @@ export default function UIVehicleInformation({
 								<div className="flex justify-between w-full items-center">
 									<span className="text-nowrap">V5C Issued:</span>
 									<span className="text-right font-extrabold">
-										{vehicleData.vehicleInformation.v5cIssued}
+										{vehicleData.vehicleInformation.v5cIssuedLong}
 									</span>
 								</div>
 							</TableCell>

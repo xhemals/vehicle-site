@@ -17,6 +17,7 @@ export default function DistanceToMoon({
 		unit === "km"
 			? (Number(distance) / distanceToMoon.km) * 100
 			: (Number(distance) / distanceToMoon.miles) * 100;
+	console.log(progressPercentage);
 	const distanceCarToMoon =
 		unit === "km"
 			? distanceToMoon.km - Number(distance)
@@ -49,6 +50,7 @@ export default function DistanceToMoon({
 						src="/images/moon-car-flame.gif"
 						width={25}
 						height={44}
+						unoptimized
 						alt="fire"
 						style={{
 							position: "absolute",
@@ -62,16 +64,22 @@ export default function DistanceToMoon({
 				<MoonStar />
 			</div>
 			<div className="text-pretty text-center">
-				<p>
-					{distanceCarToMoon > 0
-						? `This vehicle is ${distanceCarToMoon} ${unit} away from the moon`
-						: "This vehicle is on the moon!"}
-				</p>
-				<p>
-					{progressPercentage <= 100
-						? `It's ${Math.round(progressPercentage)}% of the way there!`
-						: `It's driven there ${(unit === "km" ? distance / distanceToMoon.km : distance / distanceToMoon.miles).toFixed(2)} times!`}
-				</p>
+				{progressPercentage > 0 ? (
+					<>
+						<p>
+							{distanceCarToMoon > 0
+								? `This vehicle is ${distanceCarToMoon} ${unit} away from the moon`
+								: "This vehicle is on the moon!"}
+						</p>
+						<p>
+							{progressPercentage <= 100
+								? `It's ${Math.round(progressPercentage)}% of the way there!`
+								: `It's driven there ${(unit === "km" ? distance / distanceToMoon.km : distance / distanceToMoon.miles).toFixed(2)} times!`}
+						</p>
+					</>
+				) : (
+					<p>Not enough data to calculate its distance to the moon yet!</p>
+				)}
 			</div>
 		</div>
 	);

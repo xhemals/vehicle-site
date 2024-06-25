@@ -15,7 +15,7 @@ export default function UIVehicleSpec({
 	};
 }) {
 	return (
-		<Card className="md:w-[450px] w-full">
+		<Card className="md:min-w-[450px] md:max-w-[450px] w-full h-fit">
 			<CardHeader className="pb-3 pt-4">
 				<CardTitle className="md:text-xl text-base">Vehicle Spec</CardTitle>
 			</CardHeader>

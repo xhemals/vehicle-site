@@ -17,9 +17,10 @@ type vehicleInfoType = {
 		rate: number | string;
 		band: string;
 	};
-	motStatus: { mot: string; expiryDate: string };
+	motStatus: { mot: string; expiryDateShort: string; expiryDateLong: string };
 	motInfo: {
-		lastMotTestDate: string;
+		lastMotTestDateShort: string;
+		lastMotTestDateLong: string;
 		hasHadMot: boolean;
 	};
 	vehicleInformation: {
@@ -27,7 +28,8 @@ type vehicleInfoType = {
 		model: string;
 		year: number | string;
 		colour: string;
-		v5cIssued: string;
+		v5cIssuedShort: string;
+		v5cIssuedLong: string;
 		firstRegistered: string;
 	};
 	vehicleSpec: {
@@ -39,8 +41,20 @@ type vehicleInfoType = {
 	mileage: {
 		lastMotMilage: number | string;
 		motOdometerUnit: string;
-		allPassedMotMiles: Array<number | string>;
+		allPassedMotMiles: Array<allPassedMotMilesType>;
+		mileageIncreasePerYear: Array<mileageIncreasePerYearType>;
 	};
+};
+
+type allPassedMotMilesType = {
+	date: string;
+	odometerValue: number | string;
+};
+
+type mileageIncreasePerYearType = {
+	date: string;
+	odometerValue: number | string;
+	mileageDifference: number | string;
 };
 
 export async function getServerSideProps({
@@ -102,7 +116,7 @@ export default function VehicleInfo({
 			{vehicleData ? (
 				<>
 					<UITaxMot vehicleData={vehicleData} />
-					<div className="flex flex-col md:flex-row md:justify-center gap-4 md:gap-10 w-full">
+					<div className="flex flex-col md:flex-row md:justify-center md:flex-wrap gap-4 w-full">
 						<UIVehicleInformation vehicleData={vehicleData} />
 						<UIVehicleSpec vehicleData={vehicleData} />
 						<UIMileage vehicleData={vehicleData} />

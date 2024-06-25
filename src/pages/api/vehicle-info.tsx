@@ -29,6 +29,7 @@ type motTestDataType = {
 	odometerValue: number | string;
 	odometerUnit: string;
 	testResult: string;
+	expiryDate: string;
 };
 
 type taxInfoType = {
@@ -62,13 +63,13 @@ export default async function handler(
 	const dvlaData = (carData.dvlaData as dvlaDataType) ?? {};
 	const taxInfo = (await DbGetTaxRates(
 		dvlaData.co2Emissions ?? "Unknown",
-		formatDateMonthYear(dvlaData.monthOfFirstRegistration ?? "Unknown"),
+		formatDateMYLong(dvlaData.monthOfFirstRegistration ?? "Unknown"),
 	)) as taxInfoType;
 
 	const dataNeeded = {
 		taxStatus: {
 			taxed: dvlaData.taxStatus ?? "Unknown",
-			due: formatDateShort(dvlaData.taxDueDate ?? "Unknown"),
+			due: formatDateMYLong(dvlaData.taxDueDate ?? "Unknown"),
 		},
 		taxInfo: {
 			rate: taxInfo.rate ?? "Unknown",
@@ -76,24 +77,37 @@ export default async function handler(
 		},
 		motStatus: {
 			mot: motData.motTestDueDate ? "Valid" : dvlaData.motStatus ?? "Unknown",
-			expiryDate: formatDateShort(
+			expiryDateShort: formatDateShort(
+				dvlaData.motExpiryDate ?? motData.motTestDueDate ?? "Unknown",
+			),
+			expiryDateLong: formatDateDMYLong(
 				dvlaData.motExpiryDate ?? motData.motTestDueDate ?? "Unknown",
 			),
 		},
 		motInfo: {
 			hasHadMot: motData.motTests ? true : false,
-			lastMotTestDate: formatDateShort(
+			lastMotTestDateShort: formatDateShort(
+				motData.motTests?.[0]?.completedDate ?? "Unknown",
+			),
+			lastMotTestDateLong: formatDateDMYLong(
 				motData.motTests?.[0]?.completedDate ?? "Unknown",
 			),
 			totalMots: motData.motTests?.length ?? "Unknown",
+			totalPassedMots:
+				motData.motTests?.filter((mot) => mot.testResult === "PASSED").length ??
+				"Unknown",
+			totalFailedMots:
+				motData.motTests?.filter((mot) => mot.testResult === "FAILED").length ??
+				"Unknown",
 		},
 		vehicleInformation: {
 			make: motData.make ?? "Unknown",
 			model: motData.model ?? "Unknown",
 			year: dvlaData.yearOfManufacture ?? "Unknown",
 			colour: dvlaData.colour ?? "Unknown",
-			v5cIssued: formatDateShort(dvlaData.dateOfLastV5CIssued ?? "Unknown"),
-			firstRegistered: formatDateMonthYear(
+			v5cIssuedShort: formatDateShort(dvlaData.dateOfLastV5CIssued ?? "Unknown"),
+			v5cIssuedLong: formatDateDMYLong(dvlaData.dateOfLastV5CIssued ?? "Unknown"),
+			firstRegistered: formatDateMYLong(
 				dvlaData.monthOfFirstRegistration ?? "Unknown",
 			),
 		},
@@ -115,10 +129,43 @@ export default async function handler(
 			allPassedMotMiles:
 				motData.motTests
 					?.filter((test) => test.testResult === "PASSED")
-					.map((test) => Number(test.odometerValue) ?? "Unknown") ?? "Unknown",
-			allMotMiles:
-				motData.motTests?.map((test) => Number(test.odometerValue) ?? "Unknown") ??
-				"Unknown",
+					.map((test) => {
+						return {
+							date: formatDateShort(test.completedDate),
+							odometerValue: Number(test.odometerValue) ?? "Unknown",
+						};
+					}) ?? "Unknown",
+			// allMotMiles:
+			// 	motData.motTests?.map((test) => {
+			// 		return {
+			// 			date: formatDateShort(test.completedDate),
+			// 			odometerValue: Number(test.odometerValue) ?? "Unknown",
+			// 		};
+			// 	}) ?? "Unknown",
+			mileageIncreasePerYear:
+				(() => {
+					const passedTests =
+						motData.motTests
+							?.filter((test) => test.testResult === "PASSED")
+							.map((test) => ({
+								date: formatDateShort(test.completedDate),
+								odometerValue: Number(test.odometerValue),
+							})) ?? [];
+
+					const adjustedPassedTests = passedTests.map((test, index, array) => {
+						// Use optional chaining and provide a fallback value for odometerValue
+						const nextTestOdometerValue =
+							array[index + 1]?.odometerValue ?? test.odometerValue;
+						const mileageDifference = test.odometerValue - nextTestOdometerValue;
+
+						return {
+							...test,
+							mileageDifference: mileageDifference,
+						};
+					});
+
+					return adjustedPassedTests;
+				})() ?? "Unknown",
 		},
 	};
 
@@ -141,7 +188,7 @@ const formatDateShort = (dateString: string) => {
 	return `${day}/${month}/${year}`;
 };
 
-const formatDateMonthYear = (dateString: string) => {
+const formatDateMYLong = (dateString: string) => {
 	if (dateString === "Unknown") {
 		return "Unknown";
 	}
@@ -149,9 +196,43 @@ const formatDateMonthYear = (dateString: string) => {
 	const date = new Date(dateString);
 
 	// Extract month, and year
-	const month = date.toLocaleString("default", { month: "long" });
+	const month = date.toLocaleString("en-GB", { month: "long" });
 	const year = date.getFullYear().toString();
 
 	// Return formatted date in the desired format
 	return `${month} ${year}`;
+};
+
+const formatDateDMYLong = (dateString: string) => {
+	if (dateString === "Unknown") {
+		return "Unknown";
+	}
+	// Create a Date object from the dateString
+	const date = new Date(dateString);
+
+	// Extract month, and year
+	const day = date.getDate();
+	const month = date.toLocaleString("en-GB", { month: "long" });
+	const year = date.getFullYear().toString();
+	let daySuffix;
+	switch (day) {
+		case 1:
+		case 21:
+		case 31:
+			daySuffix = "st";
+			break;
+		case 2:
+		case 22:
+			daySuffix = "nd";
+			break;
+		case 3:
+		case 23:
+			daySuffix = "rd";
+			break;
+		default:
+			daySuffix = "th";
+	}
+
+	// Return formatted date in the desired format
+	return `${day}${daySuffix} ${month} ${year}`;
 };
