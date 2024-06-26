@@ -34,6 +34,13 @@ type motTestDataType = {
 	odometerUnit: string;
 	testResult: string;
 	expiryDate: string;
+	defects: Array<motDefectDataType>;
+};
+
+type motDefectDataType = {
+	dangerous: boolean;
+	text: string;
+	type: string;
 };
 
 type taxInfoType = {
@@ -103,9 +110,38 @@ export default async function handler(
 			totalPassedMots:
 				motData.motTests?.filter((mot) => mot.testResult === "PASSED").length ??
 				"Unknown",
+			totalPassedMotsNoAdvisory:
+				motData.motTests?.filter(
+					(mot) => mot.testResult === "PASSED" && mot.defects.length == 0,
+				).length ?? "Unknown",
+			totalPassedMotsWithAdvisory:
+				motData.motTests?.filter(
+					(mot) => mot.testResult === "PASSED" && mot.defects.length > 0,
+				).length ?? "Unknown",
 			totalFailedMots:
 				motData.motTests?.filter((mot) => mot.testResult === "FAILED").length ??
 				"Unknown",
+			totalAdvisories:
+				motData.motTests
+					?.filter((mot) => mot.defects.length > 0)
+					.map((currentMot) =>
+						currentMot.defects.filter(
+							(innerCurrentMot) =>
+								innerCurrentMot.type === "ADVISORY" ||
+								innerCurrentMot.type === "MINOR" ||
+								innerCurrentMot.type === "USER ENTERED",
+						),
+					)
+					.flat().length ?? "Unknown",
+			totalFails:
+				motData.motTests
+					?.filter((mot) => mot.defects.length > 0)
+					.map((currentMot) =>
+						currentMot.defects.filter(
+							(innerCurrentMot) => innerCurrentMot.type === "FAIL",
+						),
+					)
+					.flat().length ?? "Unknown",
 		},
 		vehicleInformation: {
 			make: motData.make ?? "Unknown",
