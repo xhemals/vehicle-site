@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Accordion } from "@radix-ui/react-accordion";
 import Link from "next/link";
 import {
+	Accordion,
 	LiAccordionItem,
 	LiAccordionTrigger,
 	LiAccordionContent,
@@ -21,10 +21,10 @@ export default function UIVehicleNotFound({ reg }: { reg: string }) {
 				<Button className="hover:brightness-75">Try again</Button>
 			</Link>
 			<h3 className="text-center md:text-2xl text-lg font-bold">
-				Why can&apos;t I find my vehicle?
+				Why can&apos;t I find this vehicle?
 			</h3>
 			<p className="text-center md:text-xl text-base">
-				There could be a number of reasons why your vehicle cannot be found. Here
+				There could be a number of reasons why this vehicle cannot be found. Here
 				are some common reasons:
 			</p>
 			<div className="md:w-[896px] w-[319px]">
@@ -64,7 +64,7 @@ export default function UIVehicleNotFound({ reg }: { reg: string }) {
 									Recently changed plates
 								</LiAccordionTrigger>
 								<LiAccordionContent className="md:text-lg text-sm  pb-2">
-									If you have recently changed the number plate of your vehicle, it may
+									If you have recently changed the number plate of this vehicle, it may
 									take some time for the vehicle information to be available.
 								</LiAccordionContent>
 							</LiAccordionItem>
