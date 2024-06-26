@@ -113,4 +113,12 @@
 	header {
 		@apply md:py-5 md:px-10 px-4 py-2 text-center flex items-center justify-between;
 	}
+
+	.text-destructive a {
+		@apply underline-offset-4 underline;
+	}
+
+	a {
+		@apply text-primary underline-offset-4 hover:underline;
+	}
 }
