@@ -8,7 +8,11 @@ import UIVehicleInformation from "@/components/ui/vehicle-info/ui-vehicle-inform
 import UIVehicleSpec from "@/components/ui/vehicle-info/ui-vehicle-spec";
 import UIMileage from "@/components/ui/vehicle-info/ui-mileage";
 import UIVehicleNotFound from "@/components/ui/vehicle-info/ui-vehicle-not-found";
+import UIMotSummary from "@/components/ui/vehicle-info/ui-mot-summary";
 import Loading from "@/components/ui/loading";
+import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 type vehicleInfoType = {
 	errorMessage: string;
@@ -25,6 +29,13 @@ type vehicleInfoType = {
 		lastMotTestDateShort: string;
 		lastMotTestDateLong: string;
 		hasHadMot: boolean;
+		totalMots: number;
+		totalPassedMots: number;
+		totalPassedMotsNoAdvisory: number;
+		totalPassedMotsWithAdvisory: number;
+		totalFailedMots: number;
+		totalAdvisories: number;
+		totalFails: number;
 	};
 	vehicleInformation: {
 		make: string;
@@ -128,11 +139,28 @@ export default function VehicleInfo({
 					// If there is no error message, show the vehicle information
 					<>
 						<UITaxMot vehicleData={vehicleData} />
+						<Separator className="md:w-3/4" />
+						<h2 className="text-center md:text-3xl text-xl font-bold">
+							Basic Checks
+						</h2>
 						<div className="flex flex-col md:flex-row md:justify-center md:flex-wrap gap-4 w-full">
 							<UIVehicleInformation vehicleData={vehicleData} />
 							<UIVehicleSpec vehicleData={vehicleData} />
-							<UIMileage vehicleData={vehicleData} />
 						</div>
+						<Separator className="md:w-3/4" />
+						<h3 className="text-center md:text-3xl text-xl font-bold">MOT Summary</h3>
+						<UIMotSummary vehicleData={vehicleData} />
+						<Link href={`/mot-history/${upperCaseReg}`} passHref>
+							<Button className="hover:brightness-75">View MOT History</Button>
+						</Link>
+						<Separator className="md:w-3/4" />
+						<h3 className="text-center md:text-3xl text-xl font-bold">
+							Mileage Summary
+						</h3>
+						<UIMileage vehicleData={vehicleData} />
+						<Link href={`/mileage-history/${upperCaseReg}`} passHref>
+							<Button className="hover:brightness-75">View Mileage History</Button>
+						</Link>
 					</>
 				)
 			) : (
