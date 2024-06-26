@@ -1,5 +1,4 @@
 export default async function GetMotAuthentication() {
-	console.log("GetMotAuthentication");
 	const url = process.env.MOT_API_TOKEN_URL ?? "";
 	const data = new URLSearchParams();
 	data.append("grant_type", "client_credentials");

@@ -2,7 +2,6 @@ import { MongoClient } from "mongodb";
 import GetMotAuthentication from "@/api/mot-authentication";
 
 export async function GetMotAuth() {
-	console.log("GetMotAuth");
 	const uri = process.env.MONGODB_URI ?? "";
 	const client = new MongoClient(uri);
 	const collection = client.db("data").collection("tokens");

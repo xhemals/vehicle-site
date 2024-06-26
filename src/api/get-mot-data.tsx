@@ -1,7 +1,6 @@
 import { GetMotAuth } from "@/db/db-mot-authentication";
 
 export default async function GetMotData(reg: string) {
-	console.log("GetMotData");
 	const authToken = await GetMotAuth();
 	return fetch(
 		`https://history.mot.api.gov.uk/v1/trade/vehicles/registration/${reg}`,
