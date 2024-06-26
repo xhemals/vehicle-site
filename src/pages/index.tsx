@@ -15,7 +15,7 @@ export default function Home() {
 			</h1>
 			<NumberPlateSearch />
 			<div className="flex flex-col items-center md:items-start md:flex-row md:justify-center md:flex-wrap gap-4 h-full">
-				<div className="md:max-w-[228px] max-w-[192px]">
+				<div className="md:w-[267px] w-[219px]">
 					<h2 className="md:text-left text-center md:text-3xl text-xl font-bold">
 						Included Data
 					</h2>
@@ -34,7 +34,7 @@ export default function Home() {
 											<li>Colour</li>
 											<li>V5C Issued</li>
 											<li>First Registered</li>
-											<li>Engine Size</li>
+											<li>Export Status</li>
 										</ul>
 									</LiAccordionContent>
 								</LiAccordionItem>
@@ -48,6 +48,7 @@ export default function Home() {
 										<ul className="list-image-[url(/images/circle-check-big-light-mode.svg)] dark:list-image-[url(/images/circle-check-big-dark-mode.svg)] md:text-lg text-sm list-outside ml-6">
 											<li>Engine Size</li>
 											<li>CO₂ Emissions</li>
+											<li>Euro Status</li>
 											<li>Tax Band</li>
 											<li>Tax Rate</li>
 											<li>Fuel Type</li>
@@ -60,7 +61,24 @@ export default function Home() {
 						<li>
 							<Accordion type="single" collapsible>
 								<LiAccordionItem value="item-1">
-									<LiAccordionTrigger>Mileage Information</LiAccordionTrigger>
+									<LiAccordionTrigger>MOT Summary</LiAccordionTrigger>
+									<LiAccordionContent>
+										<ul className="list-image-[url(/images/circle-check-big-light-mode.svg)] dark:list-image-[url(/images/circle-check-big-dark-mode.svg)] md:text-lg text-sm list-outside ml-6 max-w-inherit">
+											<li>MOTs Passed</li>
+											<li>Passed W/ Advisory</li>
+											<li>MOTs Failed</li>
+											<li>Pass Rate</li>
+											<li>Total Advisories</li>
+											<li>Total Items Failed</li>
+										</ul>
+									</LiAccordionContent>
+								</LiAccordionItem>
+							</Accordion>
+						</li>
+						<li>
+							<Accordion type="single" collapsible>
+								<LiAccordionItem value="item-1">
+									<LiAccordionTrigger>Mileage Summary</LiAccordionTrigger>
 									<LiAccordionContent>
 										<ul className="list-image-[url(/images/circle-check-big-light-mode.svg)] dark:list-image-[url(/images/circle-check-big-dark-mode.svg)] md:text-lg text-sm list-outside ml-6 max-w-inherit">
 											<li>Last known mileage</li>
@@ -75,11 +93,11 @@ export default function Home() {
 						</li>
 					</ul>
 				</div>
-				<Separator orientation="vertical" className="h-10 hidden md:block" />
+				{/* <Separator orientation="vertical" className="h-10 hidden md:block" />
 				<Separator orientation="horizontal" className="md:hidden" />
 				<div>
 					<h2 className="text-center md:text-3xl text-xl font-bold">FAQs</h2>
-				</div>
+				</div> */}
 			</div>
 		</>
 	);
