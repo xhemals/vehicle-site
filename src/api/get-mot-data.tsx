@@ -15,7 +15,7 @@ export default async function GetMotData(reg: string) {
 		},
 	)
 		.then((response) => response.json())
-		.catch((error) => {
-			throw error;
+		.catch(() => {
+			return { errorMessage: `Vehicle with identifier: [${reg}] not found` };
 		});
 }

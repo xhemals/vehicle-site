@@ -1,12 +1,20 @@
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import ValidateNumberPlate from "@/components/number-plate/number-plate-validate";
 
 export default function NumberPlateSearch() {
+	const router = useRouter();
+	const queryReg = router.query.reg as string;
 	const [reg, setReg] = useState("");
 	const [validReg, setValidReg] = useState(true);
-	const router = useRouter();
+
+	useMemo(() => {
+		if (queryReg) {
+			setReg(queryReg);
+			setValidReg(true);
+		}
+	}, [queryReg]);
 
 	async function validateReg(event: { preventDefault: () => void }) {
 		event.preventDefault();
@@ -16,7 +24,7 @@ export default function NumberPlateSearch() {
 				reg: string;
 			};
 		if (isValid.validReg) {
-			return router.push(`/vrm/${isValid.reg.replace(/\s+/g, "")}`);
+			return router.push(`/vehicle-check/${isValid.reg.replace(/\s+/g, "")}`);
 		}
 		return setValidReg(false);
 	}

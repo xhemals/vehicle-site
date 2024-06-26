@@ -8,6 +8,7 @@ export default function UIVehicleSpec({
 		vehicleSpec: {
 			engineSize: number | string;
 			co2Emissions: number | string;
+			euroStatus: string;
 			fuelType: string;
 			revenueWeight: number | string;
 		};
@@ -24,7 +25,7 @@ export default function UIVehicleSpec({
 					<TableBody className="text-left md:text-base text-sm">
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Engine Size:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleSpec.engineSize}
@@ -35,7 +36,7 @@ export default function UIVehicleSpec({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">CO₂ Emissions:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleSpec.co2Emissions}{" "}
@@ -46,7 +47,17 @@ export default function UIVehicleSpec({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
+									<span className="text-nowrap">Euro Status:</span>
+									<span className="text-right font-extrabold">
+										{vehicleData.vehicleSpec.euroStatus}
+									</span>
+								</div>
+							</TableCell>
+						</TableRow>
+						<TableRow>
+							<TableCell>
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Tax Band:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.taxInfo.band}
@@ -56,7 +67,7 @@ export default function UIVehicleSpec({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Tax Rate:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.taxInfo.rate === "Unknown"
@@ -68,7 +79,7 @@ export default function UIVehicleSpec({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Fuel Type:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleSpec.fuelType}
@@ -78,7 +89,7 @@ export default function UIVehicleSpec({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Revenue Weight:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleSpec.revenueWeight === "Unknown"

@@ -15,6 +15,9 @@ type dvlaDataType = {
 	fuelType: string;
 	revenueWeight: string;
 	engineCapacity: number | string;
+	errorMessage: string;
+	euroStatus: string;
+	markedForExport: boolean | string;
 };
 
 type motDataType = {
@@ -22,6 +25,7 @@ type motDataType = {
 	make: string;
 	model: string;
 	motTests: Array<motTestDataType>;
+	errorMessage: string;
 };
 
 type motTestDataType = {
@@ -66,6 +70,9 @@ export default async function handler(
 		formatDateMYLong(dvlaData.monthOfFirstRegistration ?? "Unknown"),
 	)) as taxInfoType;
 
+	if (motData.errorMessage && dvlaData.errorMessage) {
+		return res.status(200).json({ errorMessage: motData.errorMessage });
+	}
 	const dataNeeded = {
 		taxStatus: {
 			taxed: dvlaData.taxStatus ?? "Unknown",
@@ -110,10 +117,12 @@ export default async function handler(
 			firstRegistered: formatDateMYLong(
 				dvlaData.monthOfFirstRegistration ?? "Unknown",
 			),
+			markedForExport: dvlaData.markedForExport ?? "Unknown",
 		},
 		vehicleSpec: {
 			engineSize: dvlaData.engineCapacity ?? "Unknown",
 			co2Emissions: dvlaData.co2Emissions ?? "Unknown",
+			euroStatus: dvlaData.euroStatus ?? "Unknown",
 			fuelType: dvlaData.fuelType ?? "Unknown",
 			revenueWeight: dvlaData.revenueWeight ?? "Unknown",
 		},
@@ -169,7 +178,9 @@ export default async function handler(
 		},
 	};
 
+	// setTimeout(() => {
 	res.status(200).json(dataNeeded);
+	// }, 600000); // 600000 milliseconds = 10 minutes
 }
 
 const formatDateShort = (dateString: string) => {

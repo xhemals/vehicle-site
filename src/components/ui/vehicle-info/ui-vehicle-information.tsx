@@ -12,6 +12,7 @@ export default function UIVehicleInformation({
 			colour: string;
 			v5cIssuedLong: string;
 			firstRegistered: string;
+			markedForExport: boolean | string;
 		};
 	};
 }) {
@@ -25,7 +26,7 @@ export default function UIVehicleInformation({
 					<TableBody className="text-left md:text-base text-sm">
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Make:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleInformation.make}
@@ -35,7 +36,7 @@ export default function UIVehicleInformation({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Model:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleInformation.model}
@@ -45,7 +46,7 @@ export default function UIVehicleInformation({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Year:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleInformation.year}
@@ -55,7 +56,7 @@ export default function UIVehicleInformation({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Colour:</span>
 									<span className="text-right font-extrabold flex justify-end items-center gap-2">
 										<Card
@@ -73,7 +74,7 @@ export default function UIVehicleInformation({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">V5C Issued:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleInformation.v5cIssuedLong}
@@ -83,10 +84,24 @@ export default function UIVehicleInformation({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">First Registered:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.vehicleInformation.firstRegistered}
+									</span>
+								</div>
+							</TableCell>
+						</TableRow>
+						<TableRow>
+							<TableCell>
+								<div className="flex justify-between w-full">
+									<span className="text-nowrap">Exported:</span>
+									<span className="text-right font-extrabold">
+										{vehicleData.vehicleInformation.markedForExport === "Unknown"
+											? "Unknown"
+											: vehicleData.vehicleInformation.markedForExport === true
+												? "Yes"
+												: "No"}
 									</span>
 								</div>
 							</TableCell>

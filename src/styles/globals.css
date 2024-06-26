@@ -93,7 +93,7 @@
 	}
 
 	body {
-		@apply bg-background text-foreground;
+		@apply bg-[var(--header-footer-bg)] text-foreground;
 	}
 
 	#__next {
@@ -101,7 +101,7 @@
 	}
 
 	main {
-		@apply h-full w-full py-4 px-4 md:px-10 flex justify-center flex-grow;
+		@apply h-full w-full py-4 px-4 md:px-10 flex flex-col items-center flex-grow gap-4 bg-background;
 	}
 
 	header,

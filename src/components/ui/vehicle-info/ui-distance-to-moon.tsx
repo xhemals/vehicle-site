@@ -17,7 +17,6 @@ export default function DistanceToMoon({
 		unit === "km"
 			? (Number(distance) / distanceToMoon.km) * 100
 			: (Number(distance) / distanceToMoon.miles) * 100;
-	console.log(progressPercentage);
 	const distanceCarToMoon =
 		unit === "km"
 			? distanceToMoon.km - Number(distance)
@@ -49,7 +48,7 @@ export default function DistanceToMoon({
 					<Image
 						src="/images/moon-car-flame.gif"
 						width={25}
-						height={44}
+						height={25}
 						unoptimized
 						alt="fire"
 						style={{

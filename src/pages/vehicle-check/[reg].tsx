@@ -7,8 +7,11 @@ import UITaxMot from "@/components/ui/vehicle-info/ui-tax-mot";
 import UIVehicleInformation from "@/components/ui/vehicle-info/ui-vehicle-information";
 import UIVehicleSpec from "@/components/ui/vehicle-info/ui-vehicle-spec";
 import UIMileage from "@/components/ui/vehicle-info/ui-mileage";
+import UIVehicleNotFound from "@/components/ui/vehicle-info/ui-vehicle-not-found";
+import Loading from "@/components/ui/loading";
 
 type vehicleInfoType = {
+	errorMessage: string;
 	taxStatus: {
 		taxed: string;
 		due: string;
@@ -31,10 +34,12 @@ type vehicleInfoType = {
 		v5cIssuedShort: string;
 		v5cIssuedLong: string;
 		firstRegistered: string;
+		markedForExport: boolean | string;
 	};
 	vehicleSpec: {
 		engineSize: number | string;
 		co2Emissions: number | string;
+		euroStatus: string;
 		fuelType: string;
 		revenueWeight: number | string;
 	};
@@ -86,11 +91,13 @@ export default function VehicleInfo({
 	const [vehicleData, setVehicleData] = useState<vehicleInfoType>();
 	const router = useRouter();
 
+	// Default values shown
+
 	useEffect(() => {
 		if (!validReg) {
 			void router.push("/");
 		}
-		void router.replace(`/vrm/${upperCaseReg}`, undefined, {
+		void router.replace(`/vehicle-check/${upperCaseReg}`, undefined, {
 			shallow: true,
 		});
 		// disable this rule as it does an infinite loop if i add router
@@ -111,20 +118,26 @@ export default function VehicleInfo({
 	}, [upperCaseReg, validReg]);
 
 	return (
-		<div className="flex flex-col gap-4 w-full items-center">
+		<>
 			<NumberPlate reg={upperCaseReg} className="self-top" />
 			{vehicleData ? (
-				<>
-					<UITaxMot vehicleData={vehicleData} />
-					<div className="flex flex-col md:flex-row md:justify-center md:flex-wrap gap-4 w-full">
-						<UIVehicleInformation vehicleData={vehicleData} />
-						<UIVehicleSpec vehicleData={vehicleData} />
-						<UIMileage vehicleData={vehicleData} />
-					</div>
-				</>
+				// If there is an error message, the car cannot be found so show the error message
+				vehicleData.errorMessage ? (
+					<UIVehicleNotFound reg={upperCaseReg} />
+				) : (
+					// If there is no error message, show the vehicle information
+					<>
+						<UITaxMot vehicleData={vehicleData} />
+						<div className="flex flex-col md:flex-row md:justify-center md:flex-wrap gap-4 w-full">
+							<UIVehicleInformation vehicleData={vehicleData} />
+							<UIVehicleSpec vehicleData={vehicleData} />
+							<UIMileage vehicleData={vehicleData} />
+						</div>
+					</>
+				)
 			) : (
-				<div className="h-full"></div>
+				<Loading />
 			)}
-		</div>
+		</>
 	);
 }

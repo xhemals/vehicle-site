@@ -14,7 +14,7 @@ export default async function GetDvlaInfo(reg: string) {
 	});
 
 	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
+		return { errorMessage: `Vehicle with identifier: [${reg}] not found` };
 	}
 
 	return response.json();

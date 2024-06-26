@@ -34,7 +34,7 @@ export default function UIMileage({
 		Number(vehicleData.mileage.allPassedMotMiles[0]?.odometerValue) ?? "Unknown";
 
 	return (
-		<Card className="md:min-w-[450px] md:max-w-[450px] w-full h-fit">
+		<Card className="md:min-w-[450px] md:max-w-[450px] w-full h-fit md:min-h-[466px]">
 			<CardHeader className="pb-3 pt-4">
 				<CardTitle className="md:text-xl text-base">Mileage</CardTitle>
 			</CardHeader>
@@ -43,8 +43,8 @@ export default function UIMileage({
 					<TableBody className="text-left md:text-base text-sm">
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
-									<span className="text-nowrap">Last known mileage:</span>
+								<div className="flex justify-between w-full">
+									<span className="text-nowrap h-full">Last known mileage:</span>
 									<span className="flex flex-col gap-1 text-right font-extrabold">
 										{vehicleData.motInfo.hasHadMot &&
 										vehicleData.mileage.allPassedMotMiles?.[0] ? (
@@ -63,7 +63,7 @@ export default function UIMileage({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Mileage Last Year:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.motInfo.hasHadMot &&
@@ -77,7 +77,7 @@ export default function UIMileage({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Average Yearly Mileage:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.motInfo.hasHadMot
@@ -89,7 +89,7 @@ export default function UIMileage({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex justify-between w-full items-center">
+								<div className="flex justify-between w-full">
 									<span className="text-nowrap">Estimated Current Mileage:</span>
 									<span className="text-right font-extrabold">
 										{vehicleData.motInfo.hasHadMot
@@ -101,7 +101,7 @@ export default function UIMileage({
 						</TableRow>
 						<TableRow>
 							<TableCell>
-								<div className="flex flex-col gap-3 justify-between w-full items-center">
+								<div className="flex flex-col gap-1.5 justify-between w-full items-center">
 									<span className="text-nowrap">Distance To The Moon:</span>
 									{vehicleData.motInfo.hasHadMot ? (
 										<DistanceToMoon
