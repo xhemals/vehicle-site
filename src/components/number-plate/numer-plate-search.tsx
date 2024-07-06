@@ -3,7 +3,11 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import ValidateNumberPlate from "@/components/number-plate/number-plate-validate";
 
-export default function NumberPlateSearch() {
+export default function NumberPlateSearch({
+	searchPage,
+}: {
+	searchPage: string;
+}) {
 	const router = useRouter();
 	const queryReg = router.query.reg as string;
 	const [reg, setReg] = useState("");
@@ -24,7 +28,8 @@ export default function NumberPlateSearch() {
 				reg: string;
 			};
 		if (isValid.validReg) {
-			return router.push(`/vehicle-check/${isValid.reg.replace(/\s+/g, "")}`);
+			console.log(searchPage);
+			return router.push(`/${searchPage}/${isValid.reg.replace(/\s+/g, "")}`);
 		}
 		return setValidReg(false);
 	}
@@ -50,7 +55,7 @@ export default function NumberPlateSearch() {
 				<Button
 					className={`w-3/6 ${
 						validReg
-							? "bg-search hover:brightness-75"
+							? "bg-search hover:brightness-75 active:brightness-75"
 							: "bg-destructive text-center text-black"
 					}`}
 					type="submit"

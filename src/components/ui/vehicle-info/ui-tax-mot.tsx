@@ -1,4 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import UIMotStatus from "@/components/ui/mot-history/ui-mot-status";
 
 export default function UITaxMot({
 	vehicleData,
@@ -30,24 +31,7 @@ export default function UITaxMot({
 						</div>
 					</CardContent>
 				</Card>
-				<Card
-					className={`${vehicleData.motStatus.mot === "Valid" ? "bg-success" : vehicleData.motStatus.mot === "Not valid" ? "bg-major" : "bg-warning"} w-full`}
-				>
-					<CardHeader className="md:px-6 p-3 pb-0 pt-2">
-						<CardTitle className="md:text-xl text-sm">MOT Status</CardTitle>
-					</CardHeader>
-					<CardContent className="md:pb-3 p-3 pt-0 md:text-2xl text-base flex flex-col items-center">
-						<div className="flex flex-col items-center w-fit">
-							<span className="font-bold">{vehicleData.motStatus.mot}</span>
-							<span className="text-xs md:pt-1">
-								{checkIfExpired(vehicleData.motStatus.expiryDateShort)
-									? "Expired"
-									: "Due"}
-								: {vehicleData.motStatus.expiryDateLong}
-							</span>
-						</div>
-					</CardContent>
-				</Card>
+				<UIMotStatus motStatus={vehicleData.motStatus} />
 			</CardContent>
 		</Card>
 	);
