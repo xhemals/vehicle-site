@@ -7,7 +7,13 @@ import {
 	LiAccordionContent,
 } from "@/components/ui/li-accordion";
 
-export default function UIVehicleNotFound({ reg }: { reg: string }) {
+export default function UIVehicleNotFound({
+	reg,
+	previousPage,
+}: {
+	reg: string;
+	previousPage: string;
+}) {
 	return (
 		<div className="flex flex-col items-center gap-1 h-full text-destructive">
 			<h2 className="text-center md:text-5xl text-3xl font-bold">
@@ -17,7 +23,7 @@ export default function UIVehicleNotFound({ reg }: { reg: string }) {
 				The vehicle you are looking for cannot be found. Please check that the
 				number plate has been entered correctly and try again.
 			</p>
-			<Link href={`/?reg=${reg}`} passHref className="py-3">
+			<Link href={`/${previousPage}/?reg=${reg}`} passHref className="my-3">
 				<Button className="hover:brightness-75">Try again</Button>
 			</Link>
 			<h3 className="text-center md:text-2xl text-lg font-bold">

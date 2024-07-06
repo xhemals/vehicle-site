@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Table, TableBody, TableRow, TableCell } from "@/components/ui/table";
-import DistanceToMoon from "./ui-distance-to-moon";
+import DistanceToMoon from "@/components/ui/mileage-history/ui-distance-to-moon";
 
 type passedMotMilesType = {
 	date: string;
