@@ -11,6 +11,9 @@ const config = {
 		"./src/**/*.{ts,tsx}",
 	],
 	prefix: "",
+	future: {
+		hoverOnlyWhenSupported: true,
+	},
 	theme: {
 		container: {
 			center: true,
@@ -38,6 +41,7 @@ const config = {
 				success: "var(--success)",
 				plate: "var(--plate)",
 				"plate-text": "var(--plate-text)",
+				"header-footer-bg": "var(--header-footer-bg)",
 				primary: {
 					DEFAULT: "var(--primary)",
 					foreground: "var(--primary-foreground)",

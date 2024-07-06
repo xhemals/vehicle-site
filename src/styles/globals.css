@@ -93,7 +93,7 @@
 	}
 
 	body {
-		@apply bg-[var(--header-footer-bg)] text-foreground;
+		@apply bg-header-footer-bg text-foreground;
 	}
 
 	#__next {
@@ -106,8 +106,7 @@
 
 	header,
 	footer {
-		background-color: var(--header-footer-bg);
-		color: var(--foreground);
+		@apply bg-header-footer-bg text-foreground;
 	}
 
 	header {
@@ -118,7 +117,7 @@
 		@apply underline-offset-4 underline;
 	}
 
-	a {
+	a:not(header a, nav a) {
 		@apply text-primary underline-offset-4 hover:underline;
 	}
 }
