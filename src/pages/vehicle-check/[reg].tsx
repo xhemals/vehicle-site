@@ -6,8 +6,8 @@ import { GetVehicleInfo } from "@/components/api/api-calls";
 import UITaxMot from "@/components/ui/vehicle-info/ui-tax-mot";
 import UIVehicleInformation from "@/components/ui/vehicle-info/ui-vehicle-information";
 import UIVehicleSpec from "@/components/ui/vehicle-info/ui-vehicle-spec";
-import UIMileage from "@/components/ui/vehicle-info/ui-mileage";
-import UIVehicleNotFound from "@/components/ui/vehicle-info/ui-vehicle-not-found";
+import UIMileage from "@/components/ui/mileage-history/ui-mileage";
+import UIVehicleNotFound from "@/components/ui/not-found/ui-vehicle-not-found";
 import UIMotSummary from "@/components/ui/vehicle-info/ui-mot-summary";
 import Loading from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
@@ -130,11 +130,12 @@ export default function VehicleInfo({
 
 	return (
 		<>
+			<h1 className="text-center md:text-5xl text-3xl font-bold">Vehicle Check</h1>
 			<NumberPlate reg={upperCaseReg} className="self-top" />
 			{vehicleData ? (
 				// If there is an error message, the car cannot be found so show the error message
 				vehicleData.errorMessage ? (
-					<UIVehicleNotFound reg={upperCaseReg} />
+					<UIVehicleNotFound reg={upperCaseReg} previousPage="vehicle-check" />
 				) : (
 					// If there is no error message, show the vehicle information
 					<>
@@ -151,7 +152,11 @@ export default function VehicleInfo({
 						<h3 className="text-center md:text-3xl text-xl font-bold">MOT Summary</h3>
 						<UIMotSummary vehicleData={vehicleData} />
 						<Link href={`/mot-history/${upperCaseReg}`} passHref>
-							<Button className="hover:brightness-75">View MOT History</Button>
+							{vehicleData.motInfo.hasHadMot ? (
+								<Button className="hover:brightness-75 active:brightness-75">
+									View MOT History
+								</Button>
+							) : null}
 						</Link>
 						<Separator className="md:w-3/4" />
 						<h3 className="text-center md:text-3xl text-xl font-bold">
@@ -159,7 +164,11 @@ export default function VehicleInfo({
 						</h3>
 						<UIMileage vehicleData={vehicleData} />
 						<Link href={`/mileage-history/${upperCaseReg}`} passHref>
-							<Button className="hover:brightness-75">View Mileage History</Button>
+							{vehicleData.motInfo.hasHadMot ? (
+								<Button className="hover:brightness-75 active:brightness-75">
+									View Mileage History
+								</Button>
+							) : null}
 						</Link>
 					</>
 				)

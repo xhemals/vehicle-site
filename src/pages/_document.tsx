@@ -23,6 +23,7 @@ class MyDocument extends Document {
 						href="/images/favicon-16x16.png"
 					/>
 					<link rel="manifest" href="/site.webmanifest" />
+					<meta name="theme-color" content="#72818f" />
 				</Head>
 				<body>
 					<Main />

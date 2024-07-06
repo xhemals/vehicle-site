@@ -126,10 +126,7 @@ export default async function handler(
 					?.filter((mot) => mot.defects.length > 0)
 					.map((currentMot) =>
 						currentMot.defects.filter(
-							(innerCurrentMot) =>
-								innerCurrentMot.type === "ADVISORY" ||
-								innerCurrentMot.type === "MINOR" ||
-								innerCurrentMot.type === "USER ENTERED",
+							(innerCurrentMot) => innerCurrentMot.type !== "FAIL",
 						),
 					)
 					.flat().length ?? "Unknown",
