@@ -8,7 +8,7 @@ import UIVehicleInformation from "@/components/ui/vehicle-info/ui-vehicle-inform
 import UIVehicleSpec from "@/components/ui/vehicle-info/ui-vehicle-spec";
 import UIMileage from "@/components/ui/mileage-history/ui-mileage";
 import UIVehicleNotFound from "@/components/ui/not-found/ui-vehicle-not-found";
-import UIMotSummary from "@/components/ui/vehicle-info/ui-mot-summary";
+import UIMotSummary from "@/components/ui/mot-history/ui-mot-summary";
 import Loading from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";

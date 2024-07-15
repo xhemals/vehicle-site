@@ -36,7 +36,7 @@ export default function UIMileage({
 	return (
 		<>
 			{vehicleData.motInfo.hasHadMot ? (
-				<Card className="md:min-w-[450px] md:max-w-[450px] w-full h-fit">
+				<Card className="md:w-[450px] w-full h-fit">
 					<CardContent className="flex flex-col gap-3 items-center md:pb-3 p-3 pt-3">
 						<Table>
 							<TableBody className="text-left md:text-base text-sm">
