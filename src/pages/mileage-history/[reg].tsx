@@ -6,10 +6,10 @@ import { useState, useEffect } from "react";
 import Loading from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import UIVehicleNotFound from "@/components/ui/not-found/ui-vehicle-not-found";
-import UIMotNotFound from "@/components/ui/not-found/ui-mot-not-found";
 import UIMileage from "@/components/ui/mileage-history/ui-mileage";
 import { MileageChart } from "@/components/ui/charts/mileage-history-bar";
 import UIMileageChange from "@/components/ui/mileage-history/ui-mileage-change";
+import UIMileageNotFound from "@/components/ui/mot-history/ui-mileage-not-found";
 
 type mileageDataType = {
 	errorMessage: string;
@@ -113,7 +113,7 @@ export default function MileageHistory({
 						</div>
 					</>
 				) : (
-					<UIMotNotFound />
+					<UIMileageNotFound />
 				)
 			) : (
 				<Loading />
