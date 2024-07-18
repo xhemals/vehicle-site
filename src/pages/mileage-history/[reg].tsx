@@ -10,6 +10,7 @@ import UIMileage from "@/components/ui/mileage-history/ui-mileage";
 import { MileageChart } from "@/components/ui/charts/mileage-history-bar";
 import UIMileageChange from "@/components/ui/mileage-history/ui-mileage-change";
 import UIMileageNotFound from "@/components/ui/mot-history/ui-mileage-not-found";
+import { NextSeo } from "next-seo";
 
 type mileageDataType = {
 	errorMessage: string;
@@ -95,6 +96,7 @@ export default function MileageHistory({
 
 	return (
 		<>
+			<NextSeo title={`Mileage History - ${upperCaseReg}`} />
 			<h1 className="text-center md:text-5xl text-3xl font-bold">
 				Mileage History
 			</h1>

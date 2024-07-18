@@ -13,6 +13,7 @@ import Loading from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { NextSeo } from "next-seo";
 
 type vehicleInfoType = {
 	errorMessage: string;
@@ -130,6 +131,7 @@ export default function VehicleInfo({
 
 	return (
 		<>
+			<NextSeo title={`Vehicle Check - ${upperCaseReg}`} />
 			<h1 className="text-center md:text-5xl text-3xl font-bold">Vehicle Check</h1>
 			<NumberPlate reg={upperCaseReg} className="self-top" />
 			{vehicleData ? (

@@ -10,6 +10,7 @@ import UIVehicleNotFound from "@/components/ui/not-found/ui-vehicle-not-found";
 import UIMotTests from "@/components/ui/mot-history/ui-mot-tests";
 import UIMotStatus from "@/components/ui/mot-history/ui-mot-status";
 import UIMotNotFound from "@/components/ui/not-found/ui-mot-not-found";
+import { NextSeo } from "next-seo";
 
 type motDataType = {
 	errorMessage: string;
@@ -103,6 +104,7 @@ export default function MotHistory({
 
 	return (
 		<>
+			<NextSeo title={`MOT History - ${upperCaseReg}`} />
 			<h1 className="text-center md:text-5xl text-3xl font-bold">MOT History</h1>
 			<NumberPlate reg={upperCaseReg} className="self-top" />
 			{motData ? (

@@ -1,15 +1,19 @@
 import NumberPlateSearch from "@/components/number-plate/numer-plate-search";
-import { Separator } from "@/components/ui/separator";
 import {
 	Accordion,
 	LiAccordionContent,
 	LiAccordionItem,
 	LiAccordionTrigger,
 } from "@/components/ui/li-accordion";
+import { NextSeo } from "next-seo";
 
 export default function Home() {
 	return (
 		<>
+			<NextSeo
+				title="Free Car Check"
+				description="Check your vehicle for details such as mileage, MOT status, tax status and more."
+			/>
 			<h1 className="text-center md:text-5xl text-3xl font-bold">
 				Free Car Check
 			</h1>

@@ -1,15 +1,19 @@
 import NumberPlateSearch from "@/components/number-plate/numer-plate-search";
-import { Separator } from "@/components/ui/separator";
 import {
 	Accordion,
 	LiAccordionContent,
 	LiAccordionItem,
 	LiAccordionTrigger,
 } from "@/components/ui/li-accordion";
+import { NextSeo } from "next-seo";
 
 export default function Home() {
 	return (
 		<>
+			<NextSeo
+				title="MOT Check"
+				description="Check your vehicles MOT status and details"
+			/>
 			<h1 className="text-center md:text-5xl text-3xl font-bold">MOT Check</h1>
 			<NumberPlateSearch searchPage="mot-history" />
 			<div className="flex flex-col items-center md:items-start md:flex-row md:justify-center md:flex-wrap gap-4 h-full">

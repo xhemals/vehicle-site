@@ -6,10 +6,15 @@ import {
 	LiAccordionItem,
 	LiAccordionTrigger,
 } from "@/components/ui/li-accordion";
+import { NextSeo } from "next-seo";
 
 export default function Home() {
 	return (
 		<>
+			<NextSeo
+				title="Mileage History"
+				description="Check your vehicle for mileage history and details"
+			/>
 			<h1 className="text-center md:text-5xl text-3xl font-bold">
 				Mileage History
 			</h1>
