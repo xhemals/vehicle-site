@@ -28,7 +28,6 @@ export default function NumberPlateSearch({
 				reg: string;
 			};
 		if (isValid.validReg) {
-			console.log(searchPage);
 			return router.push(`/${searchPage}/${isValid.reg.replace(/\s+/g, "")}`);
 		}
 		return setValidReg(false);

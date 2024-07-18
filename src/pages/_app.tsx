@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import "@/styles/globals.css";
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import { Analytics } from "@vercel/analytics/react";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
 	return (
@@ -13,6 +14,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 			enableSystem
 			disableTransitionOnChange
 		>
+			<Analytics />
 			<Header />
 			<main className={GeistSans.className}>
 				<Component {...pageProps} />
