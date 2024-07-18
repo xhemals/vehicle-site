@@ -25,7 +25,7 @@ export default async function handler(
 ) {
 	const { vrm } = req.body as { vrm: string };
 	// Define domain
-	const allowedDomain = "http://localhost:3000";
+	const allowedDomain = process.env.ALLOWED_API_URL ?? "";
 
 	// Extract the Referer header
 	const referer = req.headers.referer ?? "";
