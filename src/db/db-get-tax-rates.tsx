@@ -14,7 +14,7 @@ export default async function DbGetTaxRates(
 	}
 
 	// some values are unknown, so return unknown to stop errors
-	if (emissions === "Unknown" || firstRegistered === "Unknown") {
+	if (emissions === "Unknown" ?? firstRegistered === "Unknown") {
 		return { rate: "Unknown", band: "Unknown" };
 	}
 	const uri = process.env.MONGODB_URI ?? "";

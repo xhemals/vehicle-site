@@ -59,7 +59,7 @@ export default function NumberPlateSearch({
 							: "bg-destructive text-center text-black"
 					}`}
 					type="submit"
-					disabled={!reg || !validReg}
+					disabled={!reg ?? !validReg}
 				>
 					{validReg ? "Search" : "Enter a valid UK reg"}
 				</Button>

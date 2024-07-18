@@ -24,15 +24,6 @@ type passedMotMilesType = {
 	odometerValue: number | string;
 };
 
-// const chartData = [{ month: "January", miles: 186 }];
-
-// const chartConfig = {
-// 	desktop: {
-// 		label: "Miles",
-// 		color: "hsl(var(--chart-1))",
-// 	},
-// } satisfies ChartConfig;
-
 export function MileageChart({
 	mileageData,
 }: {
