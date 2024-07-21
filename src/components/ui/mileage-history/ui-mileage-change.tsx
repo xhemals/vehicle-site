@@ -34,9 +34,9 @@ export default function UIMileage({
 					<Table>
 						<TableHeader className="text-left md:text-base text-sm font-bold">
 							<TableRow>
-								<TableHead>Date</TableHead>
-								<TableHead>Mileage</TableHead>
-								<TableHead>Change</TableHead>
+								<TableHead className="text-card-foreground">Date</TableHead>
+								<TableHead className="text-card-foreground">Mileage</TableHead>
+								<TableHead className="text-card-foreground">Change</TableHead>
 							</TableRow>
 						</TableHeader>
 						<TableBody className="text-left md:text-base text-sm">
