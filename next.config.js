@@ -28,6 +28,9 @@ const config = {
 			},
 		];
 	},
+	images: {
+		domains: ["i.ebayimg.com"],
+	},
 };
 
 export default config;
