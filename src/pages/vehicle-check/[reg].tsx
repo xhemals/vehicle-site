@@ -2,13 +2,14 @@ import NumberPlate from "@/components/number-plate/number-plate-visualiser";
 import ValidateNumberPlate from "@/components/number-plate/number-plate-validate";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { GetVehicleInfo } from "@/components/api/api-calls";
+import { GetVehicleInfo, GetEbayListings } from "@/components/api/api-calls";
 import UITaxMot from "@/components/ui/vehicle-info/ui-tax-mot";
 import UIVehicleInformation from "@/components/ui/vehicle-info/ui-vehicle-information";
 import UIVehicleSpec from "@/components/ui/vehicle-info/ui-vehicle-spec";
 import UIMileage from "@/components/ui/mileage-history/ui-mileage";
 import UIVehicleNotFound from "@/components/ui/not-found/ui-vehicle-not-found";
 import UIMotSummary from "@/components/ui/mot-history/ui-mot-summary";
+import UIVehiclesForSale from "@/components/ui/vehicle-info/ui-similar-vehicles";
 import Loading from "@/components/ui/loading";
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
@@ -74,6 +75,10 @@ type mileageIncreasePerYearType = {
 	mileageDifference: number | string;
 };
 
+type ebayListingsType = {
+	results: object;
+};
+
 export async function getServerSideProps({
 	params,
 }: {
@@ -101,6 +106,7 @@ export default function VehicleInfo({
 	validReg: boolean;
 }) {
 	const [vehicleData, setVehicleData] = useState<vehicleInfoType>();
+	const [ebayListings, setEbayListings] = useState<ebayListingsType>();
 	const router = useRouter();
 
 	// Default values shown
@@ -128,6 +134,21 @@ export default function VehicleInfo({
 			fetchData();
 		}
 	}, [upperCaseReg, validReg]);
+
+	useEffect(() => {
+		if (vehicleData) {
+			GetEbayListings(
+				vehicleData.vehicleInformation.make,
+				vehicleData.vehicleInformation.model,
+				vehicleData.vehicleSpec.engineSize,
+				vehicleData.vehicleInformation.year,
+			)
+				.then((data) => setEbayListings(data as ebayListingsType))
+				.catch((error) => {
+					console.error("Failed to fetch vehicle info:", error);
+				});
+		}
+	}, [vehicleData]);
 
 	return (
 		<>
@@ -172,6 +193,15 @@ export default function VehicleInfo({
 								</Button>
 							) : null}
 						</Link>
+						<Separator className="md:w-3/4" />
+						{Array.isArray(ebayListings) && ebayListings.length > 0 ? (
+							<>
+								<h3 className="text-center md:text-3xl text-xl font-bold">
+									Similar Vehicles For Sale
+								</h3>
+								<UIVehiclesForSale ebayListings={ebayListings} />
+							</>
+						) : null}
 					</>
 				)
 			) : (
