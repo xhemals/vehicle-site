@@ -51,7 +51,6 @@ export default async function DbEbayListings(
 				year,
 			)) as unknown as ebayListingDataType;
 			if (ebayListings.total === 0) {
-				console.log("No results found");
 				return null;
 			}
 			const results = ebayListings.itemSummaries.map(

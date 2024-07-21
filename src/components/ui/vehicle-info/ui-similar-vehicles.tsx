@@ -20,7 +20,6 @@ export default function UIVehiclesForSale({
 		url: string;
 	}[];
 }) {
-	console.log(ebayListings);
 	return (
 		<>
 			<div className="flex md:flex-row flex-col gap-3 items-center justify-center h-fit w-full">

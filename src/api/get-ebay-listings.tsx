@@ -26,7 +26,6 @@ export default async function GetEbayListings(
 		};
 		return results;
 	} catch (error) {
-		console.log("Error fetching eBay listings:", error);
 		return null; // Return null if there is an error
 	}
 }
