@@ -20,6 +20,7 @@ export default function UIVehiclesForSale({
 		url: string;
 	}[];
 }) {
+	console.log(ebayListings);
 	return (
 		<>
 			<div className="flex md:flex-row flex-col gap-3 items-center justify-center h-fit w-full">
@@ -36,7 +37,6 @@ export default function UIVehiclesForSale({
 								/>
 							</AspectRatio>
 							<Separator />
-							{/* <p>{listing.title.slice(0, 25)}</p> */}
 							<p>
 								{listing.title.length > 23 ? (
 									<HoverCard>

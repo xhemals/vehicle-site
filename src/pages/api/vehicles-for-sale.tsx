@@ -21,10 +21,10 @@ export default async function handler(
 	const referer = req.headers.referer ?? "";
 
 	// Check if the Referer header exists and starts with domain
-	// if (!referer ?? !referer.startsWith(allowedDomain)) {
-	// 	// If not, return a 403 Forbidden status
-	// 	return res.status(403).json({ error: "Access denied" });
-	// }
+	if (!referer ?? !referer.startsWith(allowedDomain)) {
+		// If not, return a 403 Forbidden status
+		return res.status(403).json({ error: "Access denied" });
+	}
 
 	const ebayListings = (await DbEbayListings(make, model, engineSize, year)) as {
 		results: Array<{
@@ -34,6 +34,9 @@ export default async function handler(
 			itemWebUrl: string;
 		}>;
 	};
+	if (ebayListings === null) {
+		return res.status(200).json([]);
+	}
 
 	res.status(200).json(ebayListings.results);
 }

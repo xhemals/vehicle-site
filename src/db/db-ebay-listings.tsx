@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import GetEbayListings from "@/api/get-ebay-listings";
 
 type ebayListingDataType = {
+	total: number;
 	itemSummaries: Array<{
 		title: string;
 		image: { imageUrl: string };
@@ -49,6 +50,10 @@ export default async function DbEbayListings(
 				engineSize,
 				year,
 			)) as unknown as ebayListingDataType;
+			if (ebayListings.total === 0) {
+				console.log("No results found");
+				return null;
+			}
 			const results = ebayListings.itemSummaries.map(
 				(item: {
 					title: string;

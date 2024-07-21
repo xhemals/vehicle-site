@@ -149,13 +149,14 @@ export default function VehicleInfo({
 				});
 		}
 	}, [vehicleData]);
+	console.log(ebayListings === null);
 
 	return (
 		<>
 			<NextSeo title={`Vehicle Check - ${upperCaseReg}`} />
 			<h1 className="text-center md:text-5xl text-3xl font-bold">Vehicle Check</h1>
 			<NumberPlate reg={upperCaseReg} className="self-top" />
-			{vehicleData ? (
+			{vehicleData && ebayListings ? (
 				// If there is an error message, the car cannot be found so show the error message
 				vehicleData.errorMessage ? (
 					<UIVehicleNotFound reg={upperCaseReg} previousPage="vehicle-check" />
