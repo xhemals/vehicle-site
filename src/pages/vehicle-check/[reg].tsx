@@ -149,7 +149,6 @@ export default function VehicleInfo({
 				});
 		}
 	}, [vehicleData]);
-	console.log(ebayListings === null);
 
 	return (
 		<>
