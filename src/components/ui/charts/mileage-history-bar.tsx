@@ -96,6 +96,7 @@ export function MileageChart({
 								activeDot={{
 									r: 6,
 								}}
+								isAnimationActive={false}
 							>
 								<LabelList
 									fill="var(--foreground)"
