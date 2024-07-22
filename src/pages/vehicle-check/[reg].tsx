@@ -136,6 +136,9 @@ export default function VehicleInfo({
 	}, [upperCaseReg, validReg]);
 
 	useEffect(() => {
+		if (vehicleData?.errorMessage) {
+			return;
+		}
 		if (vehicleData) {
 			GetEbayListings(
 				vehicleData.vehicleInformation.make,
@@ -155,7 +158,7 @@ export default function VehicleInfo({
 			<NextSeo title={`Vehicle Check - ${upperCaseReg}`} />
 			<h1 className="text-center md:text-5xl text-3xl font-bold">Vehicle Check</h1>
 			<NumberPlate reg={upperCaseReg} className="self-top" />
-			{vehicleData && ebayListings ? (
+			{vehicleData && ebayListings !== null ? (
 				// If there is an error message, the car cannot be found so show the error message
 				vehicleData.errorMessage ? (
 					<UIVehicleNotFound reg={upperCaseReg} previousPage="vehicle-check" />
